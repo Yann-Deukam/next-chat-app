@@ -8,6 +8,7 @@ import { ChevronLeft } from "lucide-react";
 import Avatar from "./Avatar";
 import { HiEllipsisHorizontal } from "react-icons/hi2";
 import ProfileDrawer from "./ProfileDrawer";
+import AvatarGroup from "./AvatarGroup";
 
 interface HeaderProps {
   conversation: Conversation & {
@@ -39,7 +40,11 @@ export default function Header({ conversation }: HeaderProps) {
           >
             <ChevronLeft size={32} />
           </Link>
-          <Avatar user={otherUser} />
+          {conversation.isGroup ? (
+            <AvatarGroup users={conversation.users} />
+          ) : (
+            <Avatar user={otherUser} />
+          )}
           <div className="flex flex-col">
             <div>{conversation.name || otherUser.name}</div>
             <div className="text-xs font-light text-zinc-400">{statusText}</div>
